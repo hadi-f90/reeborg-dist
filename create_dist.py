@@ -13,11 +13,7 @@ def zipdir(new_dir, path, ziph=None):
     # ziph is zipfile handle
     os.chdir("..")
     for root, dirs, files in os.walk(path):
-        skip = False
-        for skip_dir in skip_dirs:
-            if skip_dir in root:
-                skip = True
-                break
+        skip = any(skip_dir in root for skip_dir in skip_dirs)
         if skip:
             continue
         for file in files:
